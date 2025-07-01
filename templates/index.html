@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MCQ Generator</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            padding-top: 2rem;
+        }
+        .container {
+            max-width: 800px;
+        }
+        .form-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        }
+        .title {
+            color: #0d6efd;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        .file-info {
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+        .btn-generate {
+            width: 100%;
+            padding: 0.5rem;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <h1 class="title">MCQ Generator</h1>
+            <form action="/" method="post" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="text" class="form-label">Or enter your text here:</label>
+                    <textarea class="form-control" id="text" name="text" rows="5" placeholder="Paste your content here..."></textarea>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="file" class="form-label">Or upload a PDF file:</label>
+                    <input class="form-control" type="file" id="file" name="file" accept=".pdf">
+                    <div class="file-info">Only PDF files are accepted</div>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="num_questions" class="form-label">Number of questions to generate:</label>
+                    <input type="number" class="form-control" id="num_questions" name="num_questions" min="1" max="20" value="5">
+                </div>
+                
+                <button type="submit" class="btn btn-primary btn-generate">Generate MCQs</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

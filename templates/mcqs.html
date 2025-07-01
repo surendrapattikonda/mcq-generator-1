@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generated MCQs</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            padding-top: 2rem;
+        }
+        .container {
+            max-width: 800px;
+        }
+        .mcq-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        .title {
+            color: #0d6efd;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        .question {
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+        .options {
+            margin-left: 1.5rem;
+        }
+        .option {
+            margin-bottom: 0.5rem;
+            padding: 0.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .option:hover {
+            background-color: #f0f0f0;
+        }
+        .option.selected {
+            background-color: #e7f1ff;
+        }
+        .option.correct {
+            background-color: #d4edda;
+        }
+        .option.incorrect {
+            background-color: #f8d7da;
+        }
+        .feedback {
+            margin-top: 0.5rem;
+            padding: 0.5rem;
+            border-radius: 5px;
+            display: none;
+        }
+        .feedback.correct {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        .feedback.incorrect {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        .btn-back {
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="mcq-container">
+            <h1 class="title">Generated Questions</h1>
+            
+            {% for index, mcq in mcqs %}
+            <div class="mb-4 question-container">
+                <div class="question">{{ index }}. {{ mcq[0] }}</div>
+                <div class="options">
+                    {% for option in ['A', 'B', 'C', 'D'] %}
+                    <div class="option" 
+                         data-question="{{ index }}" 
+                         data-option="{{ option }}" 
+                         data-correct="{{ mcq[2] }}"
+                         onclick="selectOption(this)">
+                        <input type="radio" name="q{{ index }}" id="q{{ index }}{{ option }}" style="display: none;">
+                        <label for="q{{ index }}{{ option }}" style="cursor: pointer;">{{ option }}) {{ mcq[1][loop.index0] }}</label>
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="feedback correct" id="correct{{ index }}">
+                    ✔ Correct! Well done.
+                </div>
+                <div class="feedback incorrect" id="incorrect{{ index }}">
+                    ✘ Incorrect. The correct answer is {{ mcq[2] }}.
+                </div>
+            </div>
+            {% endfor %}
+            
+            <a href="/" class="btn btn-primary btn-back">Generate More Questions</a>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function selectOption(element) {
+            const questionNum = element.getAttribute('data-question');
+            const selectedOption = element.getAttribute('data-option');
+            const correctAnswer = element.getAttribute('data-correct');
+            
+            // Remove all selected classes from options in this question
+            document.querySelectorAll(`.option[data-question="${questionNum}"]`).forEach(opt => {
+                opt.classList.remove('selected', 'correct', 'incorrect');
+            });
+            
+            // Add selected class to clicked option
+            element.classList.add('selected');
+            
+            // Hide all feedback messages first
+            document.getElementById(`correct${questionNum}`).style.display = 'none';
+            document.getElementById(`incorrect${questionNum}`).style.display = 'none';
+            
+            // Check if answer is correct
+            if (selectedOption === correctAnswer) {
+                element.classList.add('correct');
+                document.getElementById(`correct${questionNum}`).style.display = 'block';
+            } else {
+                element.classList.add('incorrect');
+                document.getElementById(`incorrect${questionNum}`).style.display = 'block';
+                
+                // Highlight the correct answer
+                document.querySelectorAll(`.option[data-question="${questionNum}"]`).forEach(opt => {
+                    if (opt.getAttribute('data-option') === correctAnswer) {
+                        opt.classList.add('correct');
+                    }
+                });
+            }
+        }
+    </script>
+</body>
+</html>
