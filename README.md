@@ -109,10 +109,10 @@ http://127.0.0.1:8000/
 ## 🖼️ Screenshots
 
 ### 📥 Input Page
-<img src="screenshots/home.png" alt="Input Page" width="800"/>
+<img src="Screenshots/home.png" alt="Input Page" width="800"/>
 
 ### 📋 MCQ Output Page
-<img src="screenshots/mcqoutput.png" alt="MCQ Output Page" width="800"/>
+<img src="Screenshots/mcqoutput.png" alt="MCQ Output Page" width="800"/>
 
 
 ## 🔮 Future Enhancements
