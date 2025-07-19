@@ -117,7 +117,7 @@ http://127.0.0.1:8000/
 
 ## 🔮 Future Enhancements
 
-Use BERT or T5 for better question quality
+Use BERT or T5 or LLMs for better question quality 
 
 Generate distractors using WordNet or external APIs
 
